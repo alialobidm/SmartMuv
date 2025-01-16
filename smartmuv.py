@@ -14,11 +14,11 @@ if __name__ == "__main__":
     config.read("config.ini")
     input_dir = config.get('directories', 'contract_directory')
     
-    contract_name = "CommunityBankCoin"
-    cont_addr = "0x143e685dd51d467d77663a3be119217185d81b99"
+    contract_name = "slave" #0x1f19545C78Be9fFAFDf14ADDfe40B13FfBD9a65B *address for testing)
+    cont_addr = "0x1f19545C78Be9fFAFDf14ADDfe40B13FfBD9a65B"
     compiler_version = "0.4.25"
-    # you can either add network of your own choice or choose from the following options:
-    # "test" (Goerli), "mainnet" (Ethereum Mainnet), "mumbai", "polygon", "bsctest", and "bsc"
+    # you can either add network of your own choice in config.ini or choose from the following options:
+    # "test" (Sepolia), "mainnet" (Ethereum Mainnet), "mumbai", "polygon", "bsctest", and "bsc"
     network = "mainnet"    
     source_code = read_source_code(contract_name, input_dir)
     print("Select the SmartMuv feature you want to use (1-3):")
