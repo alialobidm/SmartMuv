@@ -40,28 +40,31 @@ def switch_compiler(compiler_version):
         compiler_version = compiler_version.split('^')[0]
         if compiler_version.count('.') == 1:
             compiler_version += '.0'
-        if '0.3' in compiler_version:
-            compiler_version = '0.4.24'
-        if '0.4.1' in compiler_version and len(compiler_version) <= 5:
-            compiler_version = '0.4.24'
 
         if str(solcx.get_solc_version()) != compiler_version:
+            compiler_version_solcx = compiler_version
+            if '0.3' in compiler_version:
+                compiler_version_solcx = '0.4.11'
+            if '0.4.1' in compiler_version and len(compiler_version) <= 5:
+                compiler_version_solcx = '0.4.11'
             try:
-                solcx.set_solc_version(compiler_version)
+                solcx.set_solc_version(compiler_version_solcx)
                 print('solcx ->', solcx.get_solc_version())
             except Exception as e:
+                print('solcx -', e)
                 try:
-                    solcx.install_solc(compiler_version)
-                    solcx.set_solc_version(compiler_version)
+                    solcx.install_solc(compiler_version_solcx)
+                    solcx.set_solc_version(compiler_version_solcx)
                 except:
                     pass
         if solc_select.current_version()[0] != compiler_version:
+            if '0.3' in compiler_version:
+                compiler_version = '0.4.0'
             try:
                 solc_select.switch_global_version(compiler_version, True)
                 print('solc ->', solc_select.current_version()[0])
             except Exception as e:
-                print(str(e))
-
+                print('solc-select -', str(e))
     return
 
 
